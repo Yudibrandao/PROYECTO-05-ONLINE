@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { bringAllCharacters } from "../../services/apiCalls"
 import "./Characters.css"
 
 
 
 export const Characters = () => {
+    const [characters, setCharacters] = useState([])
 
     const bringCharacters = () => {
 
@@ -11,19 +13,33 @@ export const Characters = () => {
 
         bringAllCharacters()
         .then((apiResponse) => {
-            console.log(apiResponse)
+            setCharacters(apiResponse.data.results)
+            console.log(apiResponse.data.results)
         })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
 
-        .catch()
-
-
+    const characterCardClickHndler = (char) => {
+        console.log(char, "Hola")
     }
 
     return(
 
         <div className="characters-desing">
             Aqui tendremos personajes 
-            <button onclick={bringCharacters}>Personajes</button> 
+            <button onClick={bringCharacters}>Personajes</button> 
+            <ol>
+                {characters.map((char) => {
+                    return(
+                        <CharacterCard key={char.id}
+                        character= {char}
+                        handleclick={characterCardClickHndler(char)}
+                        />
+                    )
+                })}   
+            </ol>
         </div>
     )
 }
