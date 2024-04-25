@@ -1,37 +1,39 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CustomInput } from '../../components/CustomInput/CustomInput';
+import "./Home.css"
 
 
 
 export const Home = () => {
     const [count, setCount] = useState(0)
-    const [inputData, setInputData] = useState("")
-    const password = "contraseña secreta";
+    const [credentials, setCredentials] = useState({
+      email: "", 
+      password: "", 
+
+    });
+   
 
     const navigate = useNavigate()
   
     const addCountButtonHandler = () => {
       setCount(count + 1)
-    }
+    };
   
     const inputHandler = (event) => {
-      setInputData(event.target.value)
-    }
+      setCredentials((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value
+      }));
+    };
   
     useEffect(() => { }, [count]);
   
     useEffect(() => {
-      if (inputData === password) {
-        console.log("SON IGUALES!")
-        setCount(9999);
-        navigate("/login")
-      }
-      
-    },[inputData]);
+      console.log(credentials);
+    },[credentials]);
 
     return (
-
         <>
 
             <h1> SOY HOME</h1>
@@ -50,7 +52,14 @@ export const Home = () => {
                 typeProp="email"
                 nameProp="emailInput"
                 placeholderProp="introduce tu email"
-                handlerProp={inputHandler} />
+                handlerProp={inputHandler} 
+                />
+                <CustomInput
+                typeProp="password"
+                nameProp="password"
+                placeholderProp="introduce tu email"
+                handlerProp={inputHandler}
+                />
                 <p>
                     Edit <code>src/App.jsx</code> and save to test HMR
                 </p>

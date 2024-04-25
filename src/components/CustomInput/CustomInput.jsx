@@ -1,10 +1,15 @@
+import "./CustomInput.css"
 
+export const CustomInput = ({
+    typeProp,
+    nameProp,
+    placeholderProp, 
+    handlerProp, 
 
-export const CustomInput = (typeProp, nameProp, placeholderProp, handlerProp) => {
-
+}) => {    
 
     return (
-        <input 
+        <input className="customInputDesign"
         type={typeProp} 
         name={nameProp}
         placeholder={placeholderProp}
