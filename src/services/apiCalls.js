@@ -39,7 +39,7 @@ export const updateProfile = async (data, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    const res = await axios.put(`${API_URL}users/profile/update`, data, config)
+    const res = await axios.put(`${API_URL}users/profile/edit`, data, config)
     console.log(res, "yo soy updateProfile")
     return res
 
