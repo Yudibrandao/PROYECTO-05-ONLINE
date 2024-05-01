@@ -17,12 +17,12 @@ function Header() {
 
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary  ">
+      <Container  >
         <Navbar.Brand href="/">NachoT@ttoo</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto ">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/characters" className={location.pathname === "/characters" ? "elementTest": ""}>Tatuadores</Nav.Link>
 

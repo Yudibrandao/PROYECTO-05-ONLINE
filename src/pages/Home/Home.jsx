@@ -12,13 +12,8 @@ export const Home = () => {
       password: "", 
 
     });
-   
 
-    const navigate = useNavigate()
-  
-    const addCountButtonHandler = () => {
-      setCount(count + 1)
-    };
+    
   
     const inputHandler = (event) => {
       setCredentials((prevState) => ({
@@ -34,20 +29,15 @@ export const Home = () => {
     },[credentials]);
 
     return (
-        <>
+        < div className='homeDesing '>
 
-            <h1> SOY HOME</h1>
-            <h1> Vite + React </h1>
-            <h2>Subtitulo</h2>
+            <h1> </h1>
+            <h1> </h1>
+            <h2></h2>
 
             <div className="card">
-                <button onClick={() => addCountButtonHandler()}>count is {count}</button>
-                <input
-                    type='text'
-                    name='inputDePrueba'
-                    onChange={(event) => inputHandler(event)}>
-
-                </input>
+                <button onClick={bringProfileHandler}>Bring My PRofile</button>
+              
                 <CustomInput
                 typeProp="email"
                 nameProp="emailInput"
@@ -57,7 +47,7 @@ export const Home = () => {
                 <CustomInput
                 typeProp="password"
                 nameProp="password"
-                placeholderProp="introduce tu email"
+                placeholderProp="introduce tu contraseña"
                 handlerProp={inputHandler}
                 />
                 <p>
@@ -70,7 +60,7 @@ export const Home = () => {
 
         
         
-        </>
+        </div>
     )
 
 }

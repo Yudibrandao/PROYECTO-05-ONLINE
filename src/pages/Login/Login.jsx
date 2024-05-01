@@ -6,6 +6,8 @@ import "./Login.css"
 import { loginCall } from "../../services/apiCalls";
 import { decodeToken } from "react-jwt";
 
+
+
 export const Login = () => {
     const navigate = useNavigate();
 
@@ -25,7 +27,6 @@ export const Login = () => {
     };
 
     const loginMe = async () => {
-
         const answer = await loginCall(credentials);
         if (answer.data.token) {
 

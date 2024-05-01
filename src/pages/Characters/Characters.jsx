@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { bringAllCharacters } from "../../services/apiCalls"
 import "./Characters.css"
 
@@ -6,39 +6,37 @@ import "./Characters.css"
 
 export const Characters = () => {
     const [characters, setCharacters] = useState([])
-
     const bringCharacters = () => {
+
 
         // const apiResponse = await bringAllCharacters()
 
         bringAllCharacters()
-        .then((apiResponse) => {
-            setCharacters(apiResponse.data.results)
-            console.log(apiResponse.data.results)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
+            .then((res) => {
+                setCharacters(res)
 
-    const characterCardClickHndler = (char) => {
-        console.log(char, "Hola")
-    }
+            })
+            .catch((error) => {
+                console.log(error, "Error");
+            });
+    };
 
-    return(
+    useEffect(bringAllCharacters, [])
 
-        <div className="characters-desing">
-            Aqui tendremos personajes 
-            <button onClick={bringCharacters}>Personajes</button> 
+    return (
+
+        <div className="characters-desing  charactersDesing">
+            Aqui tendremos personajes
+            <button onClick={bringCharacters}>Personajes</button>
             <ol>
                 {characters.map((char) => {
-                    return(
+                    return (
                         <CharacterCard key={char.id}
-                        character= {char}
-                        handleclick={characterCardClickHndler(char)}
+                            character={char}
+                            handleclick={characterCardClickHndler(char)}
                         />
                     )
-                })}   
+                })}
             </ol>
         </div>
     )
