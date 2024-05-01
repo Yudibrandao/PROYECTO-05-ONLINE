@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -8,12 +7,12 @@ import { Characters } from "./pages/Characters/Characters";
 import { Register } from "./pages/Register/Register";
 import { Profile } from "./pages/Profile/Profile";
 import { Admin } from "./pages/Admin/Admin";
-import { Tatuador } from "./pages/Tatuador/Tatuador";
+import { Artist } from "./pages/Artist/Artist";
 import { AdminRoute } from "./components/AdminRoute/AdminRoute";
-import { TatuadorRoute } from "../../components/TatuadorRoute/TatuadorRoute";
+import { ArtistRoute } from "./components/ArtistRoute/ArtistRoute";
 import "./App.css";
 
-function App() {
+const App = () => {
   const [isServerUp, setIsServerUp] = useState(false);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function App() {
         <Route path="/characters" element={<Characters />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<AdminRoute Component={Admin} />} />
-        <Route path="/tatuador" element={<TatuadorRoute Component={Tatuador} />} />
+        <Route path="/artist" element={<ArtistRoute Component={Artist} />} />
     </Routes>
   );
 }

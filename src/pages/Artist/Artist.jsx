@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { bringProfile } from "../../services/apiCalls";
 import { IsInputError } from "../../utils/validators";
-import BootstrapModal from "../../components/BootstrapModal/BootstrapModal";
+// import {BootstrapModal} from "../../components/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedAmount, getUserData } from "../../app/slices/userSlice";
 import "./Artist.css";
@@ -18,7 +18,6 @@ export const Profile = () => {
       firstName: "",
       lastName: "",
       email: "",
-      phone: "",
       password: "",
       role: "",
     });
@@ -96,14 +95,6 @@ export const Profile = () => {
           isDisabled={!isEditing}
           handlerProp={inputHandler}
         />
-        <CustomInput
-          typeProp="phone"
-          nameProp="phone"
-          placeholderProp="phone"
-          value={profileData.phone}
-          isDisabled={!isEditing}
-          handlerProp={inputHandler}
-        />
          <CustomInput
           typeProp="password"
           nameProp="password"
@@ -120,12 +111,12 @@ export const Profile = () => {
           isDisabled="disabled"
           handlerProp={inputHandler}
         />
-          <>
+          {/* <>
             <BootstrapModal 
             profileData={profileData}
             inputHandler={inputHandler}
             token={token}/>
-          </>
+          </> */}
     </>
     </div>
     );

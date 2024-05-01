@@ -5,9 +5,10 @@ import { Characters } from "../Characters/Characters";
 import { Register } from "../Register/Register";
 import { Profile } from "../Profile/Profile";
 import { Admin } from "../Admin/Admin";
-import { Tatuador } from "../Tatuador/Tatuador";
+import { Artist } from "../Artist/Artist";
+
 import { AdminRoute } from "../../components/AdminRoute/AdminRoute";
-import { TatuadorRoute } from "../../components/TatuadorRoute/TatuadorRoute";
+import { ArtistRoute } from "../../components/ArtistRoute/ArtistRoute";
 
 export const Body = () => {
 
@@ -21,7 +22,7 @@ export const Body = () => {
         <Route path="/characters" element={<Characters />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/tatuador" element={<TatuadorRoute Component={Tatuador} />} />
+        <Route path="/artist" element={<ArtistRoute Component={Artist} />} />
 
         <Route path="/admin" element={<AdminRoute Component={Admin} />} />
 
