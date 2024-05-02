@@ -5,7 +5,7 @@ import { CustomInput } from "../CustomInput/CustomInput";
 import { updateProfile } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 
-function BootstrapModal({ profileData, inputHandler, token }) {
+export const BootstrapModal=({ profileData, inputHandler, token }) => {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();

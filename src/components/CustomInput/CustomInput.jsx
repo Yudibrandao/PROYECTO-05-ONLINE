@@ -1,23 +1,26 @@
 import "./CustomInput.css"
 
 export const CustomInput = ({
-  typeProp,
-  nameProp,
+  type,
+  name,
   placeholderProp,
-  handlerProp,
+  handler,
   value,
   isDisabled
 }) => {
-
+  const handleChange = (event) => {
+    const { value } = event.target;
+    handler(value, name);
+  };
 
   return (
     <input className="customInputDesign"
-      type={typeProp}
-      name={nameProp}
+      type={type}
+      name={name}
       placeholder={placeholderProp}
       value={value || "" }
       disabled={isDisabled}
-      onChange={(e) => handlerProp(e)}
+      onChange={(e) => handleChange(e)}
     />
   );
 };

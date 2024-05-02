@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { bringProfile } from "../../services/apiCalls";
 import { IsInputError } from "../../utils/validators";
-import { BootstrapModal} from "../../components/BootstrapModal/"
+import { BootstrapModal} from "../../components/BootstrapModal/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedAmount, getUserData } from "../../app/slices/userSlice";
 import Header from "../../components/Header/Header";

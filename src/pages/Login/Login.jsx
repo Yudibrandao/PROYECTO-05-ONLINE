@@ -18,13 +18,12 @@ export const Login = () => {
 
     const [msg, setMsg] = useState("");
 
-    const inputHandler = (e) => {
-
-        setCredentials((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
+    const inputHandler = (value, name) => {
+        setCredentials((prevData) => ({
+          ...prevData,
+          [name]: value,
         }));
-    };
+      };
 
     const loginMe = async () => {
         const answer = await loginCall(credentials);
@@ -57,15 +56,17 @@ export const Login = () => {
                 <>
 
                     <CustomInput
-                        typeProp={"email"}
-                        nameProp={"email"}
-                        handlerProp={(e) => inputHandler(e)}
+                        
+                        type={"email"}
+                        name={"email"}
+                        handler={ inputHandler}
                         placeholderProp={"Email"}
                     />
                     <CustomInput
-                        typeProp={"password"}
-                        nameProp={"password"}
-                        handlerProp={(e) => inputHandler(e)}
+                      
+                      type={"password"}
+                        name={"password"}
+                        handler={ inputHandler}
                         placeholderProp={"Indica tu contraseña"}
                     />
 

@@ -6,7 +6,6 @@ import { Register } from "../Register/Register";
 import { Profile } from "../Profile/Profile";
 import { Admin } from "../Admin/Admin";
 import { Artist } from "../Artist/Artist";
-
 import { AdminRoute } from "../../components/AdminRoute/AdminRoute";
 import { ArtistRoute } from "../../components/ArtistRoute/ArtistRoute";
 

@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./app/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore.js";
-
+import "./index.css";
 
 // instanciamos nuestro persistor, envolvemos App en un PersistGate y un Provider
 

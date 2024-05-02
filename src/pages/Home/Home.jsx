@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CustomInput } from '../../components/CustomInput/CustomInput';
-import "./Home.css"
+import "./Home.css";
+import { Button } from 'bootstrap';
+
 
 
 
@@ -36,7 +38,7 @@ export const Home = () => {
             <h2></h2>
 
             <div className="card">
-                <button onClick={bringProfileHandler}>Bring My PRofile</button>
+                {/* <button onClick={bringProfileHandler}>Bring My PRofile</button> */}
               
                 <CustomInput
                 typeProp="email"
@@ -50,13 +52,14 @@ export const Home = () => {
                 placeholderProp="introduce tu contraseña"
                 handlerProp={inputHandler}
                 />
+             <button type="button" className="btn btn-primary">enviar</button>
                 <p>
                     Edit <code>src/App.jsx</code> and save to test HMR
                 </p>
             </div>
-            <p className="read-the-docs">
+            {/* <p className="read-the-docs">
                 Click on the Vite and React logos to learn more
-            </p>
+            </p> */}
 
         
         
