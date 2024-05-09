@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { CustomInput } from "../CustomInput/CustomInput";
+import  CustomInput  from "../CustomInput/CustomInput";
 import { updateProfile } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 

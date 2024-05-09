@@ -1,86 +1,113 @@
-import { useNavigate } from "react-router-dom"
-import { CustomInput } from "../../components/CustomInput/CustomInput"
-import { ButtonC } from "../../components/ButtonC/ButtonC"
+import { useNavigate } from "react-router-dom";
+import  CustomInput  from "../../components/CustomInput/CustomInput";
+import { ButtonC } from "../../components/ButtonC/ButtonC";
 import { useEffect, useState } from "react";
-import "./Login.css"
+import "./Login.css";
 import { loginCall } from "../../services/apiCalls";
 import { decodeToken } from "react-jwt";
-
-
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
+  const dispatch = useDispatch();
 
-    const [credentials, setCredentials] = useState({
-        email: "",
-        password: ""
-    });
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [msg, setMsg] = useState("");
+  const inputHandler = (value, name) => {
+    setCredentials((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    const inputHandler = (value, name) => {
-        setCredentials((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
+  const loginMe = async () => {
+    const answer = await loginCall(credentials);
+    if (answer.data.token) {
+      const uDecodificado = decodeToken(answer.data.token);
+
+      const passport = {
+        token: answer.data.token,
+        decodificado: uDecodificado,
       };
 
-    const loginMe = async () => {
-        const answer = await loginCall(credentials);
-        if (answer.data.token) {
+      console.log(passport);
 
-            const uDecodificado = decodeToken(answer.data.token);
+      sessionStorage.setItem("passport", JSON.stringify(passport));
 
-            const passport = {
-                token: answer.data.token,
-                decodificado: uDecodificado
-            };
+      setMsg(`${uDecodificado.name}, Bienvenido de nuevo`);
 
-            console.log(passport);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  };
 
-            sessionStorage.setItem("passport", JSON.stringify(passport))
+  const handlerSend = (event) => {
+    event.preventDefault();
+    const requiredFields = ["email", "password"];
+    const emptyField = requiredFields.find((field) => !credentials[field]);
 
-            setMsg(`${uDecodificado.name}, Bienvenido de nuevo`);
+    if (emptyField) {
+      return;
+    }
 
-            setTimeout(() => {
-                navigate("/")
-            }, 3000);
-        }
+    // loginCall("user/login", credentials)
+    //   .then((data) => {
+    //     dispatch(login({ credentials: data.data.token }));
 
-    };
+    //     setTimeout(() => {
+    //       navigate("/profile");
+    //     }, 2500);
+    //   })
+    //   .catch((error) => {
+    //     // Manejar el error de Axios
+    //     console.log(error);
+    //   });
+    console.log(credentials);
+  };
 
-    return (
-        <div className="login-container loginElementsDesign">
-            {msg === "" ? (
+  return (
+    <div className="login-container loginElementsDesign">
+      {msg === "" ? (
+        <>
+          <Container>
+            <Row>
+              <Col>
+                <h2 className="titleLogin text-center">Login</h2>
+                <Form onSubmit={handlerSend} method="post">
+                  <CustomInput
+                    type={"email"}
+                    name={"email"}
+                    handler={inputHandler}
+                    placeholder={"Email"}
+                  />
+                  <CustomInput
+                    type={"password"}
+                    name={"password"}
+                    handler={inputHandler}
+                    placeholder={"Indica tu contraseña"}
+                  />
 
-                <>
+                  <div className="text-center">
+                    <Button type="submit" variant="secondary">
+                      Enviar
+                    </Button>
+                  </div>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </>
+      ) : (
+        <div>{msg}</div>
+      )}
 
-                    <CustomInput
-                        
-                        type={"email"}
-                        name={"email"}
-                        handler={ inputHandler}
-                        placeholderProp={"Email"}
-                    />
-                    <CustomInput
-                      
-                      type={"password"}
-                        name={"password"}
-                        handler={ inputHandler}
-                        placeholderProp={"Indica tu contraseña"}
-                    />
-
-                    <ButtonC
-                        title={"Login"}
-                        className={"regularButtonClass"}
-                        funtionEmit={loginMe}
-                    />
-                </>
-            ) : (
-                <div>{msg}</div>
-            )}
-
-            <pre>{JSON.stringify(credentials, null, 2) }</pre>
-        </div >
-    );
-}
+      <pre>{JSON.stringify(credentials, null, 2)}</pre>
+    </div>
+  );
+};

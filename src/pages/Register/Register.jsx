@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { CustomInput } from "../../components/CustomInput/CustomInput"
+import  CustomInput  from "../../components/CustomInput/CustomInput"
 import { ButtonC } from "../../components/ButtonC/ButtonC"
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";

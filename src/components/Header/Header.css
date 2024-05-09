@@ -1,9 +1,7 @@
-
-.navbarDesing{
- background-color: aqua;
+.headerDesing{
+    display: flex;
+    width: 100%;
+    
+   
 }
 
-.elementTest{
-    color: burlywood;
-    font-weight: bold;
-}

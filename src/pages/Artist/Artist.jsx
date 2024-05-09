@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CustomInput } from "../../components/CustomInput/CustomInput";
+import  CustomInput  from "../../components/CustomInput/CustomInput";
 import { bringProfile } from "../../services/apiCalls";
 import { IsInputError } from "../../utils/validators";
 // import {BootstrapModal} from "../../components/BootstrapModal"

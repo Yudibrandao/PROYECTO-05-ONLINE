@@ -3,7 +3,7 @@ import { getUserData } from "../../app/slices/userSlice";
 import { useEffect, useState } from "react";
 import { bringAllUsersCall, deleteUserById } from "../../services/apiCalls";
 import "./Admin.css";
-import Header from "../../components/Header/Header";
+
 
 
 export const Admin = () => {
@@ -38,7 +38,7 @@ export const Admin = () => {
 
   return (
     <>
-      <Header/>
+      
       <div className="admin-area">
         {users.length > 0 ? (
           <ul>

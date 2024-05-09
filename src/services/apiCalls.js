@@ -1,11 +1,7 @@
 
 import axios from "axios";
 
-
-
 const API_URL = "http://localhost:3000/api/"
-
-
 
 export function bringAllCharacters() {
     // Código para obtener todos los personajes

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { CustomInput } from "../../components/CustomInput/CustomInput";
+import  CustomInput  from "../../components/CustomInput/CustomInput";
 import { bringProfile } from "../../services/apiCalls";
 import { IsInputError } from "../../utils/validators";
 import { BootstrapModal} from "../../components/BootstrapModal/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedAmount, getUserData } from "../../app/slices/userSlice";
-import Header from "../../components/Header/Header";
 import "./Profile.css";
 
 
@@ -63,11 +62,11 @@ export const Profile = () => {
   }
 
   return (
-  <><Header /><div className="profileElementsDesign">
+  <><div className="profileElementsDesign">
       <>
-        <h1 className="title">MIS DATOS PERSONALES</h1>
-        <h2 className="description">Desde aquí podrás actualizar siempre tus datos.</h2>
-        <CustomInput
+        <h1 className="title"></h1>
+        <h2 className="description"></h2>
+        <CustomInput 
           typeProp="text"
           nameProp="firstName"
           placeholderProp="first name"
