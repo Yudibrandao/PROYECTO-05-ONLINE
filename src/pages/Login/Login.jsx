@@ -1,113 +1,73 @@
 import { useNavigate } from "react-router-dom";
-import  CustomInput  from "../../components/CustomInput/CustomInput";
-import { ButtonC } from "../../components/ButtonC/ButtonC";
+import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { useEffect, useState } from "react";
-import "./Login.css";
-import { loginCall } from "../../services/apiCalls";
 import { decodeToken } from "react-jwt";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUsers } from "../../services/apiCalls";
+import { userData, userLogin, userLogout } from "../../app/slices/userSlice";
+import "./Login.css";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [msg, setMsg] = useState("");
   const dispatch = useDispatch();
-
+  const userLogued = useSelector(userData).token
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
-  const inputHandler = (value, name) => {
-    setCredentials((prevData) => ({
-      ...prevData,
-      [name]: value,
+  useEffect(()=> {
+    if(userLogued && userLogued.length > 5){
+      navigate("/")
+    }
+
+  }, [userLogued])
+
+  //guardo los datos de los inputs
+  const inputHandler = (e) => {
+    setCredentials((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const loginMe = async () => {
-    const answer = await loginCall(credentials);
-    if (answer.data.token) {
-      const uDecodificado = decodeToken(answer.data.token);
-
-      const passport = {
-        token: answer.data.token,
-        decodificado: uDecodificado,
-      };
-
-      console.log(passport);
-
-      sessionStorage.setItem("passport", JSON.stringify(passport));
-
-      setMsg(`${uDecodificado.name}, Bienvenido de nuevo`);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
-    }
-  };
-
-  const handlerSend = (event) => {
-    event.preventDefault();
-    const requiredFields = ["email", "password"];
-    const emptyField = requiredFields.find((field) => !credentials[field]);
-
-    if (emptyField) {
-      return;
-    }
-
-    // loginCall("user/login", credentials)
-    //   .then((data) => {
-    //     dispatch(login({ credentials: data.data.token }));
-
-    //     setTimeout(() => {
-    //       navigate("/profile");
-    //     }, 2500);
-    //   })
-    //   .catch((error) => {
-    //     // Manejar el error de Axios
-    //     console.log(error);
-    //   });
-    console.log(credentials);
-  };
-
+  //hacemos login y guardamos el token en una variable 
+  const login = async (data) => {
+    loginUsers(data)
+      .then((token) => {
+        const decoded=  decodeToken(token)
+        dispatch(userLogin({token:token, decodificado: decoded}))
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+  }
   return (
-    <div className="login-container loginElementsDesign">
-      {msg === "" ? (
-        <>
-          <Container>
-            <Row>
-              <Col>
-                <h2 className="titleLogin text-center">Login</h2>
-                <Form onSubmit={handlerSend} method="post">
-                  <CustomInput
-                    type={"email"}
-                    name={"email"}
-                    handler={inputHandler}
-                    placeholder={"Email"}
-                  />
-                  <CustomInput
-                    type={"password"}
-                    name={"password"}
-                    handler={inputHandler}
-                    placeholder={"Indica tu contraseña"}
-                  />
 
-                  <div className="text-center">
-                    <Button type="submit" variant="secondary">
-                      Enviar
-                    </Button>
-                  </div>
-                </Form>
-              </Col>
-            </Row>
-          </Container>
-        </>
-      ) : (
-        <div>{msg}</div>
-      )}
+    <Container className="login_design">
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col md={4}>
+          <CustomInput className="inputLogin"
+            type={"email"}
+            name={"email"}
+            handler={inputHandler}
+            placeholder={"Email"}
+          />
+          <CustomInput className="inputLogin"
+            type={"password"}
+            name={"password"}
+            handler={inputHandler}
+            placeholder={"Contraseña"}
+          />
 
-      <pre>{JSON.stringify(credentials, null, 2)}</pre>
-    </div>
+          <div className="text-center">
+            <Button type="submit" variant="secondary" onClick={() => login(credentials)}>
+              Enviar
+            </Button>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };

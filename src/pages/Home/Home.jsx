@@ -1,19 +1,26 @@
 import React from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { userData } from '../../app/slices/userSlice';
 import "./Home.css";
 
 
 
 export const Home = () => {
+  const userLogued = useSelector(userData).decodificado
+  const userToken = useSelector(userData).token
   return (
     <>
       
-      <div className='main'>
-          <div className="overlay"></div>
-        
-          <div className="content">
-              <p>NACHO TATTO</p> 
+      <div className='homeDesign'>
+           <h1>Home</h1>       
+          {userLogued.firstName?(
+            <>
+            <h2>{userLogued.firstName}</h2>
+            </>
+          ):(
+             <p>NACHO TATTO</p> 
+          )}   
           </div>
-      </div>
     </>
   )
 }
@@ -28,76 +35,3 @@ export const Home = () => {
 
 
 
-
-
-
-
-// import { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { CustomInput } from '../../components/CustomInput/CustomInput';
-// import "./Home.css";
-// import { Button } from 'bootstrap';
-
-
-
-
-// export const Home = () => {
-//     const [count, setCount] = useState(0)
-//     const [credentials, setCredentials] = useState({
-//       email: "", 
-//       password: "", 
-
-//     });
-
-  
-  
-//     const inputHandler = (event) => {
-//       setCredentials((prevState) => ({
-//         ...prevState,
-//         [event.target.name]: event.target.value
-//       }));
-//     };
-  
-//     useEffect(() => { }, [count]);
-  
-//     useEffect(() => {
-//       console.log(credentials);
-//     },[credentials]);
-
-//     return (
-//         < div className='homeDesing '>
-
-//             <h1> </h1>
-//             <h1> </h1>
-//             <h2></h2>
-
-//             <div className="card">
-//                 {/* <button onClick={bringProfileHandler}>Bring My PRofile</button> */}
-              
-//                 <CustomInput
-//                 typeProp="email"
-//                 nameProp="emailInput"
-//                 placeholderProp="introduce tu email"
-//                 handlerProp={inputHandler} 
-//                 />
-//                 <CustomInput
-//                 typeProp="password"
-//                 nameProp="password"
-//                 placeholderProp="introduce tu contraseña"
-//                 handlerProp={inputHandler}
-//                 />
-//              <button type="button" className="btn btn-primary">enviar</button>
-//                 <p>
-//                     Edit <code>src/App.jsx</code> and save to test HMR
-//                 </p>
-//             </div>
-//             {/* <p className="read-the-docs">
-//                 Click on the Vite and React logos to learn more
-//             </p> */}
-
-        
-        
-//         </div>
-//     )
-
-// }

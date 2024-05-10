@@ -1,12 +1,5 @@
-
-
-.homeDesing{
-    display: flex;
-    height: 30em;
-    width: 50em;
-    background-size: unset;
-    background-position:unset;
-    justify-content: space-between;
-    align-items: center center;
-    overflow: hidden;
+.homeDesign{
+    color: aliceblue;
+    padding-top: 300px;
+  
 }

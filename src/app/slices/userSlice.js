@@ -16,7 +16,7 @@ export const userSlice = createSlice({
 
     // distintas acciones que puedo realizar en este pasillo (todas reciben un state y un action y devuelven un nuevo estado)
     reducers: {
-        login: (state, action) => {
+        userLogin: (state, action) => {
 
             return {
                 ...state,
@@ -25,7 +25,7 @@ export const userSlice = createSlice({
             }
         },
 
-        logout: (state, action) => {
+        userLogout: (state, action) => {
 
             return {
                 token: "",
@@ -49,11 +49,11 @@ export const userSlice = createSlice({
 })
 
 // exportamos las acciones a las que accederemos a través del useDispatch para escribir en el almacén
-export const {login, logout, resetCount} = userSlice.actions
+export const {userLogin, userLogout, resetCount} = userSlice.actions
 
 // definimos y exportamos los métodos que nos permitirán venir al almacén a leer información
-export const getUserData = (state) => state.user
-export const getLoggedAmount = (state) => state.user.vecesLogeado
+export const userData = (state) => state.user
+export const loggedAmount = (state) => state.user.vecesLogeado
 
 // método que nos dice si el usuario logeado es admin, artist o no, para uso en rutas privadas
 export const amIAdmin =(state) => state.user.decodificado.userRole === "admin"

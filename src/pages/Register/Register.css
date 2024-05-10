@@ -1,9 +1,4 @@
-
-
-.registerElementsDesign {
-
-    display: flex;
-    flex-direction: column;
-    background: rgba(228, 171, 97, 0.393);
-    
+.register_design{
+    padding-top: 300px;
+    color: aliceblue;
 }

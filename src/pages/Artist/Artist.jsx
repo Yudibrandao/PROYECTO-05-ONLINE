@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import  CustomInput  from "../../components/CustomInput/CustomInput";
-import { bringProfile } from "../../services/apiCalls";
+import  {CustomInput}  from "../../components/CustomInput/CustomInput";
 import { IsInputError } from "../../utils/validators";
 // import {BootstrapModal} from "../../components/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
-import { getLoggedAmount, getUserData } from "../../app/slices/userSlice";
 import "./Artist.css";
 
 export const Artist = () => {

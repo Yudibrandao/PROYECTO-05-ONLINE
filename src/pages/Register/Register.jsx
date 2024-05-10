@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import  CustomInput  from "../../components/CustomInput/CustomInput"
+import {CustomInput} from "../../components/CustomInput/CustomInput"
 import { ButtonC } from "../../components/ButtonC/ButtonC"
+import { Col, Row, Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
-import { registerNewUserCall } from "../../services/apiCalls";
 import "./Register.css"
 
 
@@ -30,46 +30,54 @@ export const Register = () => {
 
     const registerMe = async () => {
         if (!IsInputError(credentials.password, "password") && !IsInputError(credentials.email, "email")) {
-          const answer = await registerNewUserCall(credentials);
-          console.log(answer)
-          setMsg(answer.data.message);
-    
-          if (answer.data.email) {
-            setTimeout(() => {
-              navigate("/profile");
-            }, 2000);
-          }
+            // const answer = await registerNewUserCall(credentials);
+            // console.log(answer)
+            // setMsg(answer.data.message);
+
+            // if (answer.data.email) {
+            //     setTimeout(() => {
+            //         navigate("/profile");
+            //     }, 2000);
+            // }
         }
         else {
-          console.log(credentials)
-          console.log("credenciales incorrectas, algún campo no está bien introducido")
+            console.log(credentials)
+            console.log("credenciales incorrectas, algún campo no está bien introducido")
         }
-      };
+    };
 
 
     return (
-        <div className="register-container registerElementsDesign">
-            {msg === "" ? (
-                <>
+        <Container className="register_design">
 
-                    <CustomInput
-                        typeProp={"text"}
-                        nameProp={"firstName"}
-                        handlerProp={(e) => inputHandler(e)}
-                        placeholderProp={"Escribe tu Nombre"}
+            <Row className="d-flex justify-content-center align-items-center">
+                <Col md={4}>
+                    
+                    <CustomInput className="inputLogin"
+                        type={"text"}
+                        name={"firstName"}
+                        handler={inputHandler}
+                        placeholder={"Nombre"}
                     />
-                    <CustomInput
-                        typeProp={"email"}
-                        nameProp={"email"}
-                        handlerProp={(e) => inputHandler(e)}
-                        placeholderProp={"Escribe tu Email"}
+                  
+                    <CustomInput className="inputLogin"
+                        type={"text"}
+                        name={"lastName"}
+                        handler={inputHandler}
+                        placeholder={"Apellidos"}
                     />
 
-                    <CustomInput
-                        typeProp={"password"}
-                        nameProp={"password"}
-                        handlerProp={(e) => inputHandler(e)}
-                        placeholderProp={"Indica tu contraseña"}
+                    <CustomInput className="inputLogin"
+                        type={"email"}
+                        name={"email"}
+                        handler={inputHandler}
+                        placeholder={"Email"}
+                    />
+                    <CustomInput className="inputLogin"
+                        type={"password"}
+                        name={"password"}
+                        handler={inputHandler}
+                        placeholder={"Contraseña"}
                     />
 
                     <ButtonC
@@ -77,16 +85,11 @@ export const Register = () => {
                         className={"regularButtonClass"}
                         funtionEmit={registerMe}
                     />
+                </Col>
 
-                </>
-            ) : (
+            </Row>
 
-                <div>{msg}</div>
-            )}
-            { }
+        </Container>
+    )
 
-        </div>
-
-
-    );
 }

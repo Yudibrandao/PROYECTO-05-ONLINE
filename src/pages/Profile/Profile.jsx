@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import  CustomInput  from "../../components/CustomInput/CustomInput";
-import { bringProfile } from "../../services/apiCalls";
+import  {CustomInput } from "../../components/CustomInput/CustomInput";
 import { IsInputError } from "../../utils/validators";
 import { BootstrapModal} from "../../components/BootstrapModal/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
-import { getLoggedAmount, getUserData } from "../../app/slices/userSlice";
 import "./Profile.css";
 
 
@@ -35,8 +33,8 @@ export const Profile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const myProfileData = await bringProfile(token);
-      setProfileData(myProfileData);
+      // const myProfileData = await bringProfile(token);
+      setProfileData("myProfileData");
     };
     fetchProfile();
   }, []);

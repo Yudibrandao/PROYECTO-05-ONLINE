@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import  CustomInput  from "../CustomInput/CustomInput";
-import { updateProfile } from "../../services/apiCalls";
+import  {CustomInput}  from "../CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 
 export const BootstrapModal=({ profileData, inputHandler, token }) => {
@@ -23,7 +22,7 @@ export const BootstrapModal=({ profileData, inputHandler, token }) => {
   };
   const handleUpdate = async () => {
     try {
-      await updateProfile(profileData, token);
+      // await updateProfile(profileData, token);
       console.log("usuario actualizado");
       setTimeout(() => {
         setShow(false);

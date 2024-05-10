@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
-import { getUserData } from "../../app/slices/userSlice";
 import { useEffect, useState } from "react";
-import { bringAllUsersCall, deleteUserById } from "../../services/apiCalls";
 import "./Admin.css";
 
 
@@ -16,15 +14,15 @@ export const Admin = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await bringAllUsersCall(token);
-      setUsers(res.data);
+      // const res = await bringAllUsersCall(token);
+      setUsers("res.data");
     };
     fetchUsers();
   }, []);
 
   const deleteUser = async (id) => {
-    const res = await deleteUserById(id, token);
-    console.log(res);
+    // const res = await deleteUserById(id, token);
+    console.log("res");
   };
 
   // Función que inicia el borrado del usuario y muestra u oculta el botón de confirmación
