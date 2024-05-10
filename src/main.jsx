@@ -8,7 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import persistStore from "redux-persist/es/persistStore.js";
 
 
-// instanciamos nuestro persistor, envolvemos App en un PersistGate y un Provider
+// configura y rendiriza la aplicacion en el navegador 
 
 const persistor = persistStore(store);
 

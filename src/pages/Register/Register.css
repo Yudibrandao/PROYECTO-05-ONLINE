@@ -4,5 +4,6 @@
 
     display: flex;
     flex-direction: column;
-    background: burlywood;
+    background: rgba(228, 171, 97, 0.393);
+    
 }

@@ -9,7 +9,7 @@ export const Home = () => {
       
       <div className='main'>
           <div className="overlay"></div>
-          {/* <img src="../src/images/bodyTatuaje.jpg"></img> */}
+        
           <div className="content">
               <p>NACHO TATTO</p> 
           </div>

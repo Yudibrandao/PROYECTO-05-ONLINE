@@ -5,6 +5,7 @@
     user-select: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
+
 }
 
 *::-webkit-scrollbar {
@@ -21,5 +22,5 @@ li {
     height: 100vh;
     overflow: scroll;
     overflow-x: hidden; 
-    background-color: rgba(0, 0, 0, 0.356);
+    background-image: url(/./src/images/bodyTatuaje.jpg);
   }
