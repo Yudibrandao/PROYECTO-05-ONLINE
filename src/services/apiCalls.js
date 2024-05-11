@@ -15,5 +15,14 @@ export const loginUsers = (data) => {
       });
 }
 
-
+export const registerUsers = (data) => {
+  return axios 
+  .post(`${API_URL}users/create`,data)   
+  .then((res) => {
+      return res.data.message;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 
