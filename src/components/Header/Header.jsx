@@ -31,14 +31,14 @@ export const Header = () => {
     return (
         <Navbar collapseOnSelect expand="lg" className=" headerDesing">
             <Container>
-                <Navbar.Brand ><p className='p_color'>{userLogued.firstName ? (<>{userLogued.firstName}</>) : (<><Nav.Link as={Link} to="/">Inicio</Nav.Link></>)}</p></Navbar.Brand>
+                <Navbar.Brand ><p className='p_color'>{userLogued.firstName ? (<>{"\"Bienvenido " + userLogued.firstName.toUpperCase() + "\""}</>) : (<><Nav.Link as={Link} to="/">Inicio</Nav.Link></>)}</p></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto nav_link_home">
                         {isLogued && (
                             <>
                                 <Nav.Link as={Link} to="/"><p className='p_color'>Inicio</p></Nav.Link>
-                                <Nav.Link as={Link} to="/profile"><p className='p_color'>Profile</p></Nav.Link>
+                                <Nav.Link as={Link} to="/profile"><p className='p_color'>Perfil</p></Nav.Link>
                                 <Nav.Link as={Link} to="/tatuadores"><p className='p_color'>Tatuadores</p></Nav.Link>
                                 <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>
                             </>
@@ -47,13 +47,13 @@ export const Header = () => {
                     {!isLogued && (
                         <Nav className="me-auto nav_link_log">
                             <>
-                                <Nav.Link as={Link} to="/login"><p className='p_color'>Login</p></Nav.Link>
-                                <Nav.Link as={Link} to="/create"><p className='p_color'>Register</p></Nav.Link>
+                                <Nav.Link as={Link} to="/login"><p className='p_color'>Acceso</p></Nav.Link>
+                                <Nav.Link as={Link} to="/create"><p className='p_color'>Registro</p></Nav.Link>
                             </>
                         </Nav>
                     )}
                     {isLogued && (
-                        <Nav.Link onClick={logout}><p className='p_color'>Logout</p></Nav.Link>
+                        <Nav.Link onClick={logout}><p className='p_color'>Cerrar Sesión</p></Nav.Link>
                     )}
                 </Navbar.Collapse>
             </Container>

@@ -1,12 +1,28 @@
 import { useEffect, useState } from "react";
-import  {CustomInput } from "../../components/CustomInput/CustomInput";
+import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { IsInputError } from "../../utils/validators";
-import { BootstrapModal} from "../../components/BootstrapModal/BootstrapModal"
+import { BootstrapModal } from "../../components/BootstrapModal/BootstrapModal"
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { userData } from "../../app/slices/userSlice";
+import { deleteUsers, getDataUser } from "../../services/apiCalls";
+import { isAction } from "redux";
 import "./Profile.css";
 
 
 export const Profile = () => {
+
+  const dispatch = useDispatch()
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    id: "",
+    role: "",
+  })
+  const userToken = useSelector(userData).token
+  const [modify, setModify] = useState(false)
+
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -15,14 +31,23 @@ export const Profile = () => {
     role: "",
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  //Traigo los datos de usuario logueado
+  useEffect(() => {
+    getDataUser(userToken)
+      .then((userData) => {
+        setUser(userData)
+      })
+      .catch(() => {
 
-  const dispatch = useDispatch()
+      })
+  }, [userToken])
 
-  const veces = useSelector(getLoggedAmount)
-  const myPassport = useSelector(getUserData)
-  const token = myPassport.token;
+  //Funcion para eliminar el usuario
+  const deleteUser = (token)=>{
+    const delete_data = {isActive: "false"}
+    deleteUsers(token, delete_data)
+    
+  }
 
   const inputHandler = (e) => {
     setProfileData((prevState) => ({
@@ -31,81 +56,61 @@ export const Profile = () => {
     }));
   };
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      // const myProfileData = await bringProfile(token);
-      setProfileData("myProfileData");
-    };
-    fetchProfile();
-  }, []);
-
-  const updateProfileHandler = () => {
-    if (
-      !IsInputError(profileData.firstName, "name") ||
-      !IsInputError(profileData.email, "email")
-    ) {
-      console.log("nombre o email no válidos");
-      setErrorMessage("No se pueden actualizar los datos");
-      return;
-    }
-    try {
-      updateProfile(profileData, token);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const resetLoggedCount = () => {
-    console.log(veces)
-  }
-
   return (
-  <><div className="profileElementsDesign">
-      <>
-        <h1 className="title"></h1>
-        <h2 className="description"></h2>
-        <CustomInput 
-          typeProp="text"
-          nameProp="firstName"
-          placeholderProp="first name"
-          value={profileData.firstName}
-          isDisabled={!isEditing}
-          handlerProp={inputHandler} />
-        <CustomInput
-          typeProp="text"
-          nameProp="lastName"
-          placeholderProp="last name"
-          value={profileData.lastName}
-          isDisabled={!isEditing}
-          handlerProp={inputHandler} />
-        <CustomInput
-          typeProp="email"
-          nameProp="email"
-          placeholderProp="email"
-          value={profileData.email}
-          isDisabled={!isEditing}
-          handlerProp={inputHandler} />
-        <CustomInput
-          typeProp="password"
-          nameProp="password"
-          placeholderProp="*****"
-          value={profileData.password}
-          isDisabled={!isEditing}
-          handlerProp={inputHandler} />
-        <CustomInput
-          typeProp="text"
-          nameProp="role"
-          placeholderProp="role"
-          value={profileData.role.name}
-          isDisabled="disabled"
-          handlerProp={inputHandler} />
-        <>
-          <BootstrapModal
-            profileData={profileData}
-            inputHandler={inputHandler}
-            token={token} />
-        </>
-      </>
-    </div></>
+    <Container fluid className="profileDesign">
+      {modify ? (
+        <><h1>modify</h1></>
+
+      ) : (
+        <Row className="carDesign">
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={2}>
+                Nombre : {user.firstName}
+              </Col>
+            </Row>
+          </Col>
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={2}>
+                Apellido : {user.lastName}
+              </Col>
+            </Row>
+          </Col>
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={2}>
+                Email : {user.email}
+              </Col>
+            </Row>
+          </Col>
+
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={2}>
+                Id : {user.id}
+              </Col>
+            </Row></Col>
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={2}>
+                Rol : {user.role === 1 ? ("Admin") : user.role === 2 ? ("Tatuador") : ("Cliente")}
+              </Col>
+            </Row>
+          </Col>
+          <Col md={12}>
+            <Row className="d-flex justify-content-center">
+              <Col md={1}>
+                <Button onClick={()=>{setModify(true)}}>Modificar</Button>
+              </Col>
+              <Col md={1}>
+                <Button onClick={()=>deleteUser(userToken)}>Borrar</Button>
+              </Col>
+            </Row>
+          </Col>
+
+        </Row>
+      )}
+    </Container>
   );
 };
