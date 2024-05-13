@@ -43,11 +43,27 @@ export const getDataUser = (token) => {
     .catch((error) => {
       return error;
     })
-
 }
 
 //Esta funcion utiliza un token de Autorizacion para actualizar informacion del perfil(borrar)
 export const deleteUsers = (token, data) => {
+  const config = {
+    headers: {
+      Authorization: (`Bearer ${token}`)
+    }
+  }
+  return axios
+    .put(`${API_URL}users/profile/update`, data, config)
+    .then((res) => {
+      return res.data.message;
+    })
+    .catch((error) => {
+      return error;
+    })
+}
+
+//Esta funcion me modifica y actualiza los datos del usuario
+export const updateUsers = (token, data) => {
   const config = {
     headers: {
       Authorization: (`Bearer ${token}`)

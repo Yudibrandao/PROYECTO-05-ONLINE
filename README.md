@@ -15,9 +15,9 @@ Pagina Web NachoTatto, en la cual te tienes que registrar y una vez dentro podra
 Aqui te explico como funciona mi aplicación.
 
 INICIO
-![INCIO]
+![INICIO]
  
- Página principal, nos encontraremos 2 botones(Acceso/Resgitro). y al hacer click sobre Registro encontraremos los campos de Nombre, Apellido, Email y password para poder registrarse en dicha pagina.
+ Página principal, nos encontraremos 2 botones(Acceso/Registro). y al hacer click sobre Registro encontraremos los campos de Nombre, Apellido, Email y password para poder registrarse en dicha pagina.
 
  ACCESO
 ![ACCESO]()

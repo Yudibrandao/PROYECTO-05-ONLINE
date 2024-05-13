@@ -36,9 +36,14 @@ export const Login = () => {
   const login = async (data) => {
     loginUsers(data)
       .then((token) => {
-        const decoded=  decodeToken(token)
+        if(token&&token.length > 10){
+          const decoded=  decodeToken(token)
         dispatch(userLogin({token:token, decodificado: decoded}))
-      })
+        }
+        else{
+          console.log("Usuario no encontrado")
+        }
+             })
       .catch((error)=>{
         console.log(error)
       })

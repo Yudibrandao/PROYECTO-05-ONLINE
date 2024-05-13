@@ -1,5 +1,13 @@
 .homeDesign{
     color: aliceblue;
-    padding-top: 300px;
-  
+    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+
 }
+
+img {
+    width: 700px;
+    height: auto; 
+  }
+  
