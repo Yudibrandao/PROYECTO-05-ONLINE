@@ -15,22 +15,22 @@ Pagina Web NachoTatto, en la cual te tienes que registrar y una vez dentro podra
 Aqui te explico como funciona mi aplicación.
 
 INICIO
-![INICIO]
+![INICIO](/src/images/FotoInicio.png)
  
  Página principal, nos encontraremos 2 botones(Acceso/Registro). y al hacer click sobre Registro encontraremos los campos de Nombre, Apellido, Email y password para poder registrarse en dicha pagina.
 
  ACCESO
-![ACCESO]()
+![ACCESO](/src/images/FotoLogin.png)
 
 En esta pagina al hacer click sobre Acceso nos llevara a rellenar el campo email y contraseña.
 
 REGISTRO
-![REGISTRO]() 
+![REGISTRO](/src/images/FotoRegister.png) 
 
 En esta página nos encontramos campos para rellenar y poder crearnos una cuenta y acceder a la web
 
 PERFIL
-![PERFIL]()
+![PERFIL](/src/images/FotoInformacion.png)
 
 En esta página podemos ver los datos personales y si hacemos click en el boton de modificar se habilitaran los campos para que podemos modificar los datos
 
