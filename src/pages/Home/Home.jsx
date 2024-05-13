@@ -8,6 +8,8 @@ import "./Home.css";
 export const Home = () => {
   const userLogued = useSelector(userData).decodificado
   const userToken = useSelector(userData).token
+
+  console.log(userLogued)
   return (
     <>
       

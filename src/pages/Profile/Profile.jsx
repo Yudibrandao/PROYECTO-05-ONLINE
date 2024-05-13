@@ -20,9 +20,10 @@ export const Profile = () => {
     id: "",
     role: "",
   })
-  const userToken = useSelector(userData).token
-  const [modify, setModify] = useState(false)
+  const userToken = useSelector(userData).token// Almacena informacion del estado actual 
+  const [modify, setModify] = useState(false)//Si el perfil se modifica o no 
 
+  //Aqui se almacenaran los datos del perfil
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -49,6 +50,7 @@ export const Profile = () => {
     
   }
 
+  //Actualiza el estado cuando cambia los campos del formulario
   const inputHandler = (e) => {
     setProfileData((prevState) => ({
       ...prevState,

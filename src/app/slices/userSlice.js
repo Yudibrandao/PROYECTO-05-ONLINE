@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // creamos nuestro pasillo para el usuario (slice de user)
 export const userSlice = createSlice({
-    name: "user", // nombre del pasillo
-    initialState: { // estado inicial del pasillo
+    name: "user", 
+    initialState: { 
         token: "",
         decodificado: {
             role: "",
@@ -54,10 +54,5 @@ export const {userLogin, userLogout, resetCount} = userSlice.actions
 // definimos y exportamos los métodos que nos permitirán venir al almacén a leer información
 export const userData = (state) => state.user
 export const loggedAmount = (state) => state.user.vecesLogeado
-
-// método que nos dice si el usuario logeado es admin, artist o no, para uso en rutas privadas
-export const amIAdmin =(state) => state.user.decodificado.userRole === "admin"
-
-export const amIArtist =(state) => state.user.decodificado.userRole === "artist"
 
 export default userSlice.reducer

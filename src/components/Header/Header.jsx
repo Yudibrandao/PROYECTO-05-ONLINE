@@ -14,7 +14,7 @@ export const Header = () => {
     const [isLogued, setLogued] = useState(false)
     const dispatch = useDispatch()
 
-    //es un evento que comprueba si estas logueado 
+    //Es un evento que comprueba si estas logueado 
     useEffect(() => {
         if (userToken && userToken.length > 5) {
             setLogued(true)
@@ -23,7 +23,7 @@ export const Header = () => {
         }
     }, [userToken])
 
-    //elimino el token y el usuario guardado en redux
+    //Elimino el token y el usuario guardado en redux
     const logout = () => {
         dispatch(userLogout())
     }
