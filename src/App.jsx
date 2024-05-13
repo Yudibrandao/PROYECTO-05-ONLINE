@@ -11,7 +11,6 @@ function App() {
 
   return ( 
   <>
-  {/* {location.pathname!=="/"&&(<Header/>)}// */}
   <Header/>
   <Body/>
   </>
