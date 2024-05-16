@@ -79,3 +79,82 @@ export const updateUsers = (token, data) => {
     })
 
 }
+
+
+
+
+
+
+export const createAppointment = (token, appointmentData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+
+  return axios
+  .post(`${API_URL}citas/create`, appointmentData, config)
+  .then((res) => {
+    return res.data; // Retorna los datos de la nueva cita creada
+  })
+  .catch((error) => {
+    throw error; // Lanza el error para que pueda ser manejado por quien llama a esta función
+  });
+};
+
+
+
+// Función para obtener todas las citas
+export const getAppointments = (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return axios
+    .get(`${API_URL}citas/admin/listaCitas`, config)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+// Función para actualizar una cita existente
+export const updateAppointment = (token, appointment) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return axios
+    .put(`${API_URL}citas/cliente/editarCita${appointment.id}`, appointment, config) // Hace una solicitud PUT para actualizar la cita con el ID proporcionado
+    .then((res) => {
+      return res.data.message;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+// Función para eliminar una cita
+export const deleteAppointment = (token, appointmentId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return axios
+    .delete(`${API_URL}appointments/${appointmentId}`, config) // Hace una solicitud DELETE para eliminar la cita con el ID proporcionado
+    .then((res) => {
+      return res.data.message; // Retorna el mensaje de éxito
+    })
+    .catch((error) => {
+      throw error; // Lanza el error para que pueda ser manejado por quien llama a esta función
+    });
+};

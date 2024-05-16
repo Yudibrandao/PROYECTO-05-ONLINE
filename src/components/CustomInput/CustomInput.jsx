@@ -6,7 +6,7 @@ export const CustomInput = ({
   placeholder,
   type,
   name,
-  handler,
+  handler, // Mantenemos el nombre handler
   value,
   disabled,
   max,
@@ -16,7 +16,7 @@ export const CustomInput = ({
 
   return (
     <>
-      <label htmlFor={name}>  {placeholder} </label>
+      <label htmlFor={name}>{placeholder}</label>
 
       <InputGroup className="mb-3">
         <Form.Control
@@ -26,7 +26,7 @@ export const CustomInput = ({
           value={value}
           max={max}
           min={min}
-          onChange={handler}
+          onChange={handler} // Mantenemos el uso de la prop handler
           className={className}
           disabled={disabled}
         />
@@ -34,4 +34,3 @@ export const CustomInput = ({
     </>
   );
 };
-
