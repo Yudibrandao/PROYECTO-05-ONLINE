@@ -81,7 +81,17 @@ export const updateUsers = (token, data) => {
 }
 
 
+export const artists =() => {
+  return axios
+  .get(`${API_URL}tatuadores`)
+  .then((res) => {
+    return res.data[0];
+  })
+  .catch((error) => {
+    return error;
+  })
 
+}
 
 
 
@@ -92,14 +102,13 @@ export const createAppointment = (token, appointmentData) => {
     }
   };
 
-
   return axios
   .post(`${API_URL}citas/create`, appointmentData, config)
   .then((res) => {
     return res.data; // Retorna los datos de la nueva cita creada
   })
   .catch((error) => {
-    throw error; // Lanza el error para que pueda ser manejado por quien llama a esta función
+    return error; // Lanza el error para que pueda ser manejado por quien llama a esta función
   });
 };
 
@@ -119,7 +128,7 @@ export const getAppointments = (token) => {
       return res.data;
     })
     .catch((error) => {
-      throw error;
+      return error;
     });
 };
 
@@ -137,7 +146,7 @@ export const updateAppointment = (token, appointment) => {
       return res.data.message;
     })
     .catch((error) => {
-      throw error;
+      return error;
     });
 };
 
@@ -155,6 +164,14 @@ export const deleteAppointment = (token, appointmentId) => {
       return res.data.message; // Retorna el mensaje de éxito
     })
     .catch((error) => {
-      throw error; // Lanza el error para que pueda ser manejado por quien llama a esta función
+      return error; // Lanza el error para que pueda ser manejado por quien llama a esta función
     });
 };
+
+
+
+
+
+
+
+

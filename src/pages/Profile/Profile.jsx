@@ -8,8 +8,8 @@ import { userData, userLogout } from "../../app/slices/userSlice";
 import { deleteUsers, getDataUser, updateUsers } from "../../services/apiCalls";
 import { isAction } from "redux";
 import { useNavigate } from "react-router-dom";
-import "./Profile.css";
 import { set } from "react-hook-form";
+import "./Profile.css";
 
 
 export const Profile = () => {
@@ -22,7 +22,7 @@ export const Profile = () => {
     id: "",
     role: "",
   })
-  const userToken = useSelector(userData).token// Almacena informacion del estado actual 
+  const userToken = useSelector(userData).token// Almacena el token del usuario logueado
   const [modify, setModify] = useState(false)//Si el perfil se modifica o no 
 
   //Aqui se almacenaran los datos del perfil
