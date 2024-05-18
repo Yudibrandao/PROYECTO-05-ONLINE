@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
-import { artists, createAppointment } from "../../services/apiCalls";
+import { artists, createAppointment, getAppointments, getAppointmentsCliente } from "../../services/apiCalls";
 import { userData } from "../../app/slices/userSlice";
 import { useSelector } from "react-redux";
 import "./Appointment.css";
@@ -9,6 +9,7 @@ import "./Appointment.css";
 export const Appointments = () => {
     const userToken = useSelector(userData).token
     const [artistas, setArtistas] = useState([])
+    const [citas, setCitas]= useState([])
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [newAppointment, setNewAppointment] = useState({
         title: "",
@@ -27,6 +28,19 @@ export const Appointments = () => {
             })
 
     }, [userToken])
+
+    useEffect(() => {
+        getAppointmentsCliente(userToken)
+            .then((citas) => {
+                setCitas(citas)
+            })
+            .catch(() => {
+            })
+
+    }, [userToken])
+
+   console.log(citas)
+
 
     const handleCreateAppointment = () => {
         
@@ -55,6 +69,10 @@ export const Appointments = () => {
             })
 
     };
+
+
+
+
 
     return (
         <Container fluid className="appointmentsDesign">

@@ -132,6 +132,26 @@ export const getAppointments = (token) => {
     });
 };
 
+// Funcion para obtener las citas cliente 
+
+export const getAppointmentsCliente = (token) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return axios
+    .get(`${API_URL}citas/cliente/cita`, config)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      return error;
+    });
+
+};
+
 // Función para actualizar una cita existente
 export const updateAppointment = (token, appointment) => {
   const config = {
