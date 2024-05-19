@@ -171,7 +171,7 @@ export const Profile = () => {
             </Row>
             <Row >
               <Col md={12} className="m-2">
-                Rol : {user.role === 1 ? ("Admin") : user.role === 2 ? ("Tatuador") : ("Cliente")}
+                Rol : {user.role === "1" ? ("Admin") : user.role === "2" ? ("Tatuador") : ("Cliente")}
               </Col>
             </Row>
             <Row className="d-flex justify-content-center mt-3">
