@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
-import { artists, createAppointment, getAppointments, getAppointmentsCliente } from "../../services/apiCalls";
+import { artists, createAppointment, getAppointments, getAppointmentsCliente, getAppointmentsTatuadores } from "../../services/apiCalls";
 import { userData } from "../../app/slices/userSlice";
 import { useSelector } from "react-redux";
 import "./Appointment.css";
@@ -11,6 +11,7 @@ export const Appointments = () => {
     const userLogued = useSelector(userData).decodificado
     const [artistas, setArtistas] = useState([])
     const [citas, setCitas] = useState([])
+    const [citasTatuador, setCitasTatuador] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [newAppointment, setNewAppointment] = useState({
         title: "",
@@ -40,6 +41,30 @@ export const Appointments = () => {
 
     }, [userToken])
 
+
+    useEffect(() => {
+        if (userLogued.userRole === '2') {
+            getAppointmentsTatuadores(userToken)
+                .then((citasTatuador) => {
+                    setCitasTatuador(citasTatuador);
+                })
+                .catch((error) => {
+                    console.error("Error al obtener citas del tatuador:", error);
+                });
+        }
+    }, [userToken, userLogued.userRole]);
+
+
+    const handleGetTatuadorAppointments = () => {
+        getAppointmentsTatuadores(userToken)
+            .then((citas) => {
+                setCitasTatuador(citas);
+            })
+            .catch((error) => {
+                console.error("Error al obtener citas del tatuador:", error);
+            });
+    };
+    
 
     const handleCreateAppointment = () => {
 
@@ -174,6 +199,40 @@ export const Appointments = () => {
                 </>
             ):(
                 <>
+                 
+                    <Row>
+                       
+                        {citasTatuador.map((citaTattoo) => (
+                            <Col key={citaTattoo.tatuador.id} className="d-flex justify-content-center" md={5}>
+                              
+                                <Row className="justify-content-center">
+                                    <Col className="card_design" md={10}>
+                                        <Row>
+                                            
+                                            <Col md={12}>
+                                                <h6>Fecha : {citaTattoo.day_date}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Precio : {citaTattoo.price}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Tatuador : {citaTattoo.tatuador.user.firstName}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Email : {citaTattoo.tatuador.user.email}</h6>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <Button onClick={handleGetTatuadorAppointments}>Actualizar Citas del Tatuador</Button>
+                            </Col>
+                            
+                        ))}
+
+                        
+                    </Row>
+                    
+                
                 <h1>AQUI TIENE QUE IR LAS CITAS DEL TATUADOR </h1>
                 </>
             )}
