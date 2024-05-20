@@ -39,7 +39,6 @@ export const Header = () => {
                             <>
                                 <Nav.Link as={Link} to="/"><p className='p_color'>Inicio</p></Nav.Link>
                                 <Nav.Link as={Link} to="/profile"><p className='p_color'>Perfil</p></Nav.Link>
-                                <Nav.Link as={Link} to="/tatuadores"><p className='p_color'>Tatuadores</p></Nav.Link>
                                 <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>
                             </>
                         )}

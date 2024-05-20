@@ -202,29 +202,33 @@ export const Appointments = () => {
                  
                     <Row>
                        
-                        {citasTatuador.map((citaTattoo) => (
-                            <Col key={citaTattoo.tatuador.id} className="d-flex justify-content-center" md={5}>
+                        {citasTatuador.map((cita) => (
+                            <Col key={cita.id} className="d-flex justify-content-center" md={5}>
                               
                                 <Row className="justify-content-center">
                                     <Col className="card_design" md={10}>
                                         <Row>
                                             
+                                            
                                             <Col md={12}>
-                                                <h6>Fecha : {citaTattoo.day_date}</h6>
+                                                <h6>Fecha : {cita.day_date}</h6>
                                             </Col>
                                             <Col md={12}>
-                                                <h6>Precio : {citaTattoo.price}</h6>
+                                                <h6>Precio : {cita.price}</h6>
+                                            </Col>
+                                            {/* <Col md={12}>
+                                                <h6>Tatuador : {cita.cliente.user.firstName}</h6>
                                             </Col>
                                             <Col md={12}>
-                                                <h6>Tatuador : {citaTattoo.tatuador.user.firstName}</h6>
-                                            </Col>
-                                            <Col md={12}>
-                                                <h6>Email : {citaTattoo.tatuador.user.email}</h6>
-                                            </Col>
+                                                <h6>Email : {cita.cliente.email}</h6>
+                                            </Col> */}
                                         </Row>
                                     </Col>
                                 </Row>
-                                <Button onClick={handleGetTatuadorAppointments}>Actualizar Citas del Tatuador</Button>
+                                <Button onClick={handleGetTatuadorAppointments} >Actualizar Citas del Tatuador</Button>
+                                
+                             
+                                
                             </Col>
                             
                         ))}
