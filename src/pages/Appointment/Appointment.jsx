@@ -20,8 +20,6 @@ export const Appointments = () => {
         type: "",
         Tatuador: ""
     });
-
-
    
     // const navigate = useNavigate();
     // const dispatch = useDispatch()
@@ -33,8 +31,6 @@ export const Appointments = () => {
     //     role: "",
     // })
 
-
-
     // // Aqui se almacenaran los datos del perfil
     // const [modify, setModify] = useState({
     //     day_date: "",
@@ -42,16 +38,6 @@ export const Appointments = () => {
     // 	price: "",
     //     isActive: false
     // });
-
-
-
-
-
-
-
-
-
-
 
     useEffect(() => {
         artists()
@@ -170,12 +156,6 @@ export const Appointments = () => {
 
 
 
-
-
-
-
-
-
     return (
         <Container className="appointmentsDesign">
             {userLogued.userRole === "3" ? (
@@ -264,8 +244,6 @@ export const Appointments = () => {
                                         Piercing
                                     </Button>
                                 </div>
-
-
                                 <Button onClick={handleCreateAppointment}>Guardar</Button>
                                 <Button onClick={() => setShowCreateForm(false)}>Cancelar</Button>
                             </Col>
@@ -274,7 +252,6 @@ export const Appointments = () => {
                 </>
             ) : (
                 <>
-
                     <Row>
 
                         {citasTatuador.map((cita) => (
@@ -307,8 +284,6 @@ export const Appointments = () => {
 
                 </>
             )}
-
-
 
 
                 {/* modificar citas */}
@@ -403,17 +378,6 @@ export const Appointments = () => {
 
                 </Row>
             )} */}
-
-
-
-
-
         </Container>
-
-
-
-
-
-
     );
 };
