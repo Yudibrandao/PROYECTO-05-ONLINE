@@ -80,7 +80,6 @@ export const updateUsers = (token, data) => {
 
 }
 
-
 export const artists =() => {
   return axios
   .get(`${API_URL}tatuadores`)
@@ -92,8 +91,6 @@ export const artists =() => {
   })
 
 }
-
-
 
 export const createAppointment = (token, appointmentData) => {
   const config = {
@@ -176,22 +173,22 @@ export const getAppointmentsTatuadores = (token) =>{
 
 
 // Función para actualizar una cita existente
-export const updateAppointment = (token, appointment) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  };
+// export const updateAppointment = (token, appointment) => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   };
 
-  return axios
-    .put(`${API_URL}citas/cliente/editarCita${appointment.id}`, appointment, config) // Hace una solicitud PUT para actualizar la cita con el ID proporcionado
-    .then((res) => {
-      return res.data.message;
-    })
-    .catch((error) => {
-      return error;
-    });
-};
+//   return axios
+//     .put(`${API_URL}citas/cliente/editarCita${appointment.id}`, appointment, config) // Hace una solicitud PUT para actualizar la cita con el ID proporcionado
+//     .then((res) => {
+//       return res.data.message;
+//     })
+//     .catch((error) => {
+//       return error;
+//     });
+// };
 
 // Función para eliminar una cita
 export const deleteAppointment = (token, appointmentId) => {
