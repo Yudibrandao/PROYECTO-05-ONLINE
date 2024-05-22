@@ -3,14 +3,14 @@
 }
 
 .card_design{
-    background-color:lightslategray;
+    background-color:rgb(48, 52, 56);
     margin-top: 150px;
     padding: 20px;
     border: 2px solid black;
     border-radius: 20px;
     font-size: 1.1rem;
     color: aliceblue;
-    box-shadow: 2px 2px 3px 3px aliceblue;
+    box-shadow: 2px 2px 3px 3px rgb(245, 230, 94);
 }
 
 .button_create_design{
@@ -26,12 +26,12 @@
 }
 
 .col_button_create{
-    background-color:rgb(103, 138, 174);
+    background-color:rgb(48, 52, 56);
     margin-top: 150px;
     padding: 5px;
     border: 2px solid black;
     border-radius: 20px;
     font-size: 1.1rem;
     color: aliceblue;
-    box-shadow: 2px 2px 3px 3px aliceblue;
+    box-shadow: 2px 2px 3px 3px rgb(245, 230, 94);
 }

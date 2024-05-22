@@ -129,6 +129,25 @@ export const getAppointments = (token) => {
     });
 };
 
+// Función para obtener todas los datos usuarios 
+export const getAllUsers = (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return axios
+    .get(`${API_URL}users/all`, config)
+    .then((res) => {
+      return res.data[0];
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
+
 // Funcion para obtener las citas cliente 
 
 export const getAppointmentsCliente = (token) =>{
@@ -171,24 +190,23 @@ export const getAppointmentsTatuadores = (token) =>{
 };
 
 
-
 // Función para actualizar una cita existente
-// export const updateAppointment = (token, appointment) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`
-//     }
-//   };
+export const updateAppointment = (token, citas) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
 
-//   return axios
-//     .put(`${API_URL}citas/cliente/editarCita${appointment.id}`, appointment, config) // Hace una solicitud PUT para actualizar la cita con el ID proporcionado
-//     .then((res) => {
-//       return res.data.message;
-//     })
-//     .catch((error) => {
-//       return error;
-//     });
-// };
+  return axios
+    .put(`${API_URL}citas/cliente/editarCita/${id}`, citas, config) // Hace una solicitud PUT para actualizar la cita con el ID proporcionado
+    .then((res) => {
+      return res.data.message;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
 
 // Función para eliminar una cita
 export const deleteAppointment = (token, appointmentId) => {

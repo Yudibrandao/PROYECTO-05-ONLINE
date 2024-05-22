@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userData, userLogout } from '../../app/slices/userSlice';
 import "./Header.css";
 
-
 export const Header = () => {
     const userLogued = useSelector(userData).decodificado
     const userToken = useSelector(userData).token
@@ -27,7 +26,7 @@ export const Header = () => {
     const logout = () => {
         dispatch(userLogout())
     }
-
+     
     return (
         <Navbar collapseOnSelect expand="lg" className=" headerDesing">
             <Container>
@@ -39,7 +38,11 @@ export const Header = () => {
                             <>
                                 <Nav.Link as={Link} to="/"><p className='p_color'>Inicio</p></Nav.Link>
                                 <Nav.Link as={Link} to="/profile"><p className='p_color'>Perfil</p></Nav.Link>
-                                <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>
+                                {userLogued.userRole=== "1"?(
+                                    <Nav.Link as={Link} to="/admin"><p className='p_color'>Admin</p></Nav.Link>
+                                ):(
+                                    <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>  
+                                )}  
                             </>
                         )}
                     </Nav>

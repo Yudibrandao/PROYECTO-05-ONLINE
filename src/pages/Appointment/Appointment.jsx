@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
-import { artists, createAppointment, getAppointmentsCliente, getAppointmentsTatuadores } from "../../services/apiCalls";
+import { artists, createAppointment, getAppointmentsCliente, getAppointmentsTatuadores, getDataUser } from "../../services/apiCalls";
 import { userData, userLogout } from "../../app/slices/userSlice";
 import { useSelector } from "react-redux";
 import "./Appointment.css";
 
 export const Appointments = () => {
+    const [modify_citas, setModify_citas] = useState(false);
     const userToken = useSelector(userData).token
     const userLogued = useSelector(userData).decodificado
     const [artistas, setArtistas] = useState([])
     const [citas, setCitas] = useState([])
+    const [modify, setModify] = useState(false)//Si el perfil se modifica o no
     const [citasTatuador, setCitasTatuador] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [newAppointment, setNewAppointment] = useState({
@@ -20,24 +22,74 @@ export const Appointments = () => {
         type: "",
         Tatuador: ""
     });
-   
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch()
-    // const [user, setUser] = useState({
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    //     id: "",
-    //     role: "",
-    // })
 
-    // // Aqui se almacenaran los datos del perfil
-    // const [modify, setModify] = useState({
-    //     day_date: "",
-    // 	description: "",
-    // 	price: "",
-    //     isActive: false
-    // });
+
+
+    const [user, setUser] = useState({
+        day_date: "",
+        description: ""
+    })
+
+    const [dataCitas_modify, setDataCitasModify] = useState({
+        day_date: "",
+        description: ""
+    });
+
+    useEffect(() => {
+        get_user()
+    }, [userToken])
+
+    const get_user = () => {
+        getDataUser(userToken)
+            .then((userData) => {
+                setUser(userData)
+            })
+            .catch(() => {
+            })
+    }
+
+    useEffect(() => {
+        if (!userToken) {
+            navigate("/")
+        }
+
+    }, [userToken])
+
+    const inputHandler = (e) => {
+        setDataCitasModify((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const modifyCitas = (data, token) => {
+        let citas_mod = {}
+        if (data.firstName) {
+            citas_mod.firstName = data.firstName
+        }
+        if (data.lastName) {
+            citas_mod.lastName = data.lastName
+        }
+        if (data.email) {
+            citas_mod.email = data.email
+        }
+
+        updateUsers(token, data_mod)
+            .then((res) => {
+
+                get_user()
+                setModify_citas(false)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+
+
+
+
+
 
     useEffect(() => {
         artists()
@@ -73,17 +125,6 @@ export const Appointments = () => {
     }, [userToken, userLogued.userRole]);
 
 
-    const handleGetTatuadorAppointments = () => {
-        getAppointmentsTatuadores(userToken)
-            .then((citas) => {
-                setCitasTatuador(citas);
-            })
-            .catch((error) => {
-                console.error("Error al obtener citas del tatuador:", error);
-            });
-    };
-
-
     const handleCreateAppointment = () => {
 
         if (newAppointment.title === "" || newAppointment.date === "" || newAppointment.time === "" || newAppointment.type === "") return console.log("Ningun campo puede estar vacio")
@@ -111,48 +152,11 @@ export const Appointments = () => {
                     })
 
                 setShowCreateForm(false);
-
             })
             .catch(() => {
 
             })
     };
-
-    //a partir de aqui es para modificar citas 
-
-    // const modify_appointment = (dataAppointment, token) => {
-    //     let data_appointment = {}
-    //     if (dataAppointment.id) {
-    //         data_appointment.id = dataAppointment.id
-    //     }
-    //     if (dataAppointment.day_date) {
-    //         data_appointment.day_date = dataAppointment.day_date
-    //     }
-
-    //     const deleteAppointment = (token) => {
-    //         const delete_data = { isActive: "false" }
-    //         deleteAppointment(token, delete_data_appointment)
-    //         dispatch(userLogout())
-    //     }
-
-    //     //Saco los datos de los input y los guardo 
-    //     const inputHandler = (e) => {
-    //         setDataModifyAppointment((prevState) => ({
-    //             ...prevState,
-    //             [e.target.name]: e.target.value,
-    //         }));
-    //     };
-
-    //     updateAppointment(token, data_appointment)
-    //         .then((res) => {
-
-    //             get_appointment()
-    //             setModifyAppointment(false)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // }
 
 
 
@@ -247,6 +251,7 @@ export const Appointments = () => {
                                 <Button onClick={handleCreateAppointment}>Guardar</Button>
                                 <Button onClick={() => setShowCreateForm(false)}>Cancelar</Button>
                             </Col>
+
                         </Row>
                     )}
                 </>
@@ -270,114 +275,64 @@ export const Appointments = () => {
                                             <Col md={12}>
                                                 <h6>Precio : {cita.day_date}</h6>
                                             </Col>
-
                                         </Row>
                                     </Col>
                                 </Row>
-                                <Button onClick={handleGetTatuadorAppointments} >Actualizar Citas del Tatuador</Button>
-                                
                             </Col>
-
                         ))}
-
                     </Row>
-
                 </>
-            )}
+            )
+            };
+{/* 
+            <Row>
 
+                <Col>
+                    {citas.map((cita) => {
+                        return (
+                            <Col key={cita.id} className="d-flex justify-content-center" md={5}>
+                                <Row className="justify-content-center">
+                                    <Col className="card_design" md={10}>
+                                        <Row>
+                                            <Col md={12}>
+                                                <h6>Cita : {cita.description}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Fecha : {cita.day_date}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Precio : {cita.price}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Tatuador : {cita.tatuador.user.firstName}</h6>
+                                            </Col>
+                                            <Col md={12}>
+                                                <h6>Email : {cita.tatuador.user.email}</h6>
+                                            </Col>
 
-                {/* modificar citas */}
+                                        </Row>
 
-            {/* {modify ? (
-                <Row className="d-flex justify-content-center">
-                    <Col className="card_design" md={4}>
-                        <Row >
-                            <Col md={12} className="m-2 text-center">
-                                Id : {appointment.id}
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Fecha :
-                                <CustomInput className="inputLogin"
-                                    type={"date"}
-                                    name={"day_date"}
-                                    handler={inputHandler}
-                                />
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Description:
-                                <CustomInput className="inputLogin"
-                                    type={"text"}
-                                    name={"description"}
-                                    handler={inputHandler}
-                                />
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                price :
-                                <CustomInput className="inputLogin"
-                                    type={"number"}
-                                    name={"price"}
-                                    handler={inputHandler}
-                                />
-                            </Col>
-                        </Row>
-                        <Row className="d-flex justify-content-center mt-3">
-                            <Col md={4}>
-                                <Button onClick={() => modify_appointment(data_modify_appointment, userToken)}>Modificar</Button>
-                            </Col>
-                            <Col md={4}>
-                                <Button onClick={() => { setModify(false) }}>Cancelar</Button>
-                            </Col>
-                        </Row>
-                    </Col>
+                                        <Row className="d-flex justify-content-center mt-3">
+                                            <Col md={4}>
+                                                <Button onClick={() => { setModify(true) }}>Modificar</Button>
+                                            </Col>
+                                            <Col md={4}>
+                                                <Button onClick={() => deleteUser(userToken)}>Borrar</Button>
+                                            </Col>
+                                        </Row>
 
-                </Row>
+                                    </Col>
+                                </Row>
 
-            ) : (
-                <Row className="d-flex justify-content-center">
-                    <Col className="card_design" md={4}>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Nombre : {appointment.firstName}
                             </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Apellido : {appointment.lastName}
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Email : {appointment.email}
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Id : {user.id}
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col md={12} className="m-2">
-                                Rol : {user.role === "1" ? ("Admin") : user.role === "2" ? ("Tatuador") : ("Cliente")}
-                            </Col>
-                        </Row>
-                        <Row className="d-flex justify-content-center mt-3">
-                            <Col md={4}>
-                                <Button onClick={() => { setModify(true) }}>Modificar</Button>
-                            </Col>
-                            <Col md={4}>
-                                <Button onClick={() => deleteUser(userToken)}>Borrar</Button>
-                            </Col>
-                        </Row>
-                    </Col>
+                        )
 
-                </Row>
-            )} */}
+                    })}
+
+                </Col>
+            </Row> */}
+
         </Container>
     );
+
 };
